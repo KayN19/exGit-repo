@@ -1,0 +1,30 @@
+- hosts: node01
+  become: true
+
+  vars_prompt:
+  - name: user
+    prompt: "Enter User to be created"
+
+  tasks:
+  # List of tasks to run, 
+  # print user variable & create user, 
+  # create & add file to path, print ip of host, 
+  # change hostname from host variable
+
+  - debug:
+      var: user
+  
+  - user:
+     name: "{{ user }}"
+     state: present
+
+  - file:
+     path: /home/ec2-user/{{ user }}
+     state: touch
+     mode: 0644
+
+  - debug:
+     var: hostvars[inventory_hostname].ansible_all_ipv4_addresses[0]
+
+  - hostname:
+     name: "{{ varname }}"
