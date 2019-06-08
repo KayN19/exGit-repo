@@ -8,7 +8,7 @@
          instance_ids: "{{ lookup('env', 'instance_id') }}"
          wait: true
          state: absent
-         region: ca-central-1
+         region: us-east-2
       register: ec2
     - name: Print all ec2 variables
       debug: var=ec2
